@@ -48,12 +48,28 @@ create table endereco_cliente (
 	CEP                 varchar(20)     not null
 );
 
--- colocar pedido aqui
+create table pedido (
+	id_pedido			serial			not null,
+	status				varchar(45)		not null,
+	data_pedido			date			not null,
+	rastreio			varchar(45)		not null,
+	
+	id_cliente			integer			not null,
+	id_entregador		integer			not null,
+	entregue_a_cliente	integer			not null
+);
 
 create table plano (
 	id_plano 			integer			not null,
 	tipo				varchar(45)		not null,
 	preco				varchar(45)		not null
+);
+
+create table assina (
+	id_cliente			integer			not null,
+	id_plano			integer			not null,
+	data_inicio			date			not null,
+	duracao				varchar(45)		not null
 );
 
 create table roupa (
@@ -78,6 +94,12 @@ create table cor (
 create table material (
 	id_material			integer			not null,
 	id_roupa            integer			not null
+);
+
+create table pedidos_roupa (
+	id_pedido			integer			not null,
+	id_cliente			integer			not null,
+	id_roupa			integer			not null
 );
 
 -- CONSTRAINTS
@@ -115,6 +137,17 @@ pk_cor primary key(id_cor, id_roupa);
 alter table material add constraint
 pk_material primary key(id_material, id_roupa);
 
+alter table pedidos_roupa add constraint
+pk_pedidos_roupa primary key (id_pedido,id_cliente,id_roupa);
+
+alter table assina add constraint
+pk_assina primary key (id_cliente,id_plano,data_inicio);
+
+alter table plano add constraint
+pk_plano primary key (id_plano);
+
+alter table pedido add constraint
+pk_pedido primery key (id_pedido);
 
 -- FK
 alter table funcionario add constraint
@@ -140,6 +173,29 @@ fk_cor_roupa foreign key(id_roupa) references roupa;
 
 alter table material add constraint
 fk_material_roupa foreign key(id_roupa) references roupa;
+
+alter table pedidos_roupa add constraint
+fk_pedidos_roupa_pedido foreign key (id_pedido) references pedido;
+
+alter table pedidos_roupa add constraint
+fk_pedidos_roupa_cliente foreign key (id_cliente) references cliente;
+
+alter table pedidos_roupa add constraint
+fk_pedidos_roupa_roupa foreign key (id_roupa) references roupa;
+
+alter table assina add constraint
+fk_assina_plano foreign key (id_plano) references plano;
+
+alter table assina add constraint
+fk_assina_cliente foreign key (id_cliente) references cliente;
+
+alter table pedido add constraint
+fk_pedido_cliente foreign key (id_cliente) references cliente;
+
+alter table pedido add constraint
+fk_pedido_entregador foreign key (id_entregado) references entregador;
+
+-- fk id cliente para entrega
 
 -- Unique
 alter table funcionario add constraint
