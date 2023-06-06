@@ -259,8 +259,8 @@ insert into setor values(default, 'Suporte',null);
 insert into funcionario values (default,'Alecsander Cruz','110.917.434-95','1993-07-29','M','alecsander@gmail.com','15000',1);
 insert into funcionario values (default,'Bruno Rodrigues','375.667.084-81','1994-04-23','M','charles@gmail.com','10000',3);
 insert into funcionario values (default,'Charles Jhansen','535.794.894-10','1990-11-13','M','bruno@gmail.com','12000',2);
-insert into funcionario values (default,'João Silva', '123.456.789-00', '1990-01-01', 'M', 'joao.silva@example.com', '5000.00', 1),     -- Funcionário 1: João Silva, CPF 123.456.789-00, data de nascimento 1990-01-01, sexo masculino, e-mail joao.silva@example.com, salário 5000.00, setor 1
-insert into funcionario values (default,'Maria Oliveira', '987.654.321-00', '1995-05-10', 'F', 'maria.oliveira@example.com', '4500.00', 2),  -- Funcionário 2: Maria Oliveira, CPF 987.654.321-00, data de nascimento 1995-05-10, sexo feminino, e-mail maria.oliveira@example.com, salário 4500.00, setor 2
+insert into funcionario values (default,'João Silva', '123.456.789-00', '1990-01-01', 'M', 'joao.silva@example.com', '5000.00', 1);     -- Funcionário 1: João Silva, CPF 123.456.789-00, data de nascimento 1990-01-01, sexo masculino, e-mail joao.silva@example.com, salário 5000.00, setor 1
+insert into funcionario values (default,'Maria Oliveira', '987.654.321-00', '1995-05-10', 'F', 'maria.oliveira@example.com', '4500.00', 2);  -- Funcionário 2: Maria Oliveira, CPF 987.654.321-00, data de nascimento 1995-05-10, sexo feminino, e-mail maria.oliveira@example.com, salário 4500.00, setor 2
 insert into funcionario values (default,'Pedro Santos', '456.789.123-00', '1988-07-20', 'M', 'pedro.santos@example.com', '5500.00', 1);      -- Funcionário 3: Pedro Santos, CPF 456.789.123-00, data de nascimento 1988-07-20, sexo masculino, e-mail pedro.santos@example.com, salário 5500.00, setor 1
 
 -- primeiro funcionario a ser inserido dispara um trigger para torna-lo gerente do setor ao qual foi adicionado
@@ -273,8 +273,8 @@ insert into funcionario values (default,'Maria raluca','210.810.134-94','1999-12
 
 -- Entregador
 insert into entregador values (5, '5229783620-1', 'Honda bros');
-insert into entregador values (1, '123456789', 'Carro'),   -- Entregador 1: Funcionário 1, CNH 123456789, Veículo Carro
-insert into entregador values (2, '987654321', 'Moto'),    -- Entregador 2: Funcionário 2, CNH 987654321, Veículo Moto
+insert into entregador values (1, '123456789', 'Carro');   -- Entregador 1: Funcionário 1, CNH 123456789, Veículo Carro
+insert into entregador values (2, '987654321', 'Moto');    -- Entregador 2: Funcionário 2, CNH 987654321, Veículo Moto
 insert into entregador values (3,  '456789123', 'Bicicleta');  -- Entregador 3: Funcionário 3, CNH 456789123, Veículo Bicicleta
 
 -- Cliente
