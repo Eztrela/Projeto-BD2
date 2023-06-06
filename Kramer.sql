@@ -73,7 +73,8 @@ create table roupa (
 	data_aquisicao		date			not null,
 	marca        		varchar(45),
 	tamanho				varchar(45)		not null,
-	estado 				varchar(45)		not null
+	estado 				varchar(45)		not null,
+	desc_roupa			varchar(45)		not null
 );
 
 create table categoria (
@@ -258,6 +259,9 @@ insert into setor values(default, 'Suporte',null);
 insert into funcionario values (default,'Alecsander Cruz','110.917.434-95','1993-07-29','M','alecsander@gmail.com','15000',1);
 insert into funcionario values (default,'Bruno Rodrigues','375.667.084-81','1994-04-23','M','charles@gmail.com','10000',3);
 insert into funcionario values (default,'Charles Jhansen','535.794.894-10','1990-11-13','M','bruno@gmail.com','12000',2);
+insert into funcionario values (default,'João Silva', '123.456.789-00', '1990-01-01', 'M', 'joao.silva@example.com', '5000.00', 1),     -- Funcionário 1: João Silva, CPF 123.456.789-00, data de nascimento 1990-01-01, sexo masculino, e-mail joao.silva@example.com, salário 5000.00, setor 1
+insert into funcionario values (default,'Maria Oliveira', '987.654.321-00', '1995-05-10', 'F', 'maria.oliveira@example.com', '4500.00', 2),  -- Funcionário 2: Maria Oliveira, CPF 987.654.321-00, data de nascimento 1995-05-10, sexo feminino, e-mail maria.oliveira@example.com, salário 4500.00, setor 2
+insert into funcionario values (default,'Pedro Santos', '456.789.123-00', '1988-07-20', 'M', 'pedro.santos@example.com', '5500.00', 1);      -- Funcionário 3: Pedro Santos, CPF 456.789.123-00, data de nascimento 1988-07-20, sexo masculino, e-mail pedro.santos@example.com, salário 5500.00, setor 1
 
 -- primeiro funcionario a ser inserido dispara um trigger para torna-lo gerente do setor ao qual foi adicionado
 
@@ -269,6 +273,9 @@ insert into funcionario values (default,'Maria raluca','210.810.134-94','1999-12
 
 -- Entregador
 insert into entregador values (5, '5229783620-1', 'Honda bros');
+insert into entregador values (1, '123456789', 'Carro'),   -- Entregador 1: Funcionário 1, CNH 123456789, Veículo Carro
+insert into entregador values (2, '987654321', 'Moto'),    -- Entregador 2: Funcionário 2, CNH 987654321, Veículo Moto
+insert into entregador values (3,  '456789123', 'Bicicleta');  -- Entregador 3: Funcionário 3, CNH 456789123, Veículo Bicicleta
 
 -- Cliente
 insert into cliente values (default, 'Ana Souza', '789.123.456-00', '2000-03-20', 'F', 'ana.souza@example.com', 'senhaabc', '(41) 55555-5555');
@@ -299,16 +306,16 @@ insert into material values(default, 'Metal');
 insert into material values(default, 'Madeira');
 
 -- Roupa
-insert into roupa values(default, 'Disponível', '2022-01-15', 'Nike', 'M', 'Novo');
-insert into roupa values(default, 'Disponível', '2022-03-20', 'Adidas', 'S', 'Novo');
-insert into roupa values(default, 'Indisponível', '2022-02-10', 'Puma', 'L', 'Usado');
-insert into roupa values(default, 'Disponível', '2022-05-05', 'Reebok', 'XL', 'Novo');
-insert into roupa values(default, 'Indisponível', '2022-04-01', 'Under Armour', 'M', 'Usado');
-insert into roupa values(default, 'Disponível', '2022-06-12', 'New Balance', 'S', 'Novo');
-insert into roupa values(default, 'Indisponível', '2022-07-25', 'Vans', 'L', 'Usado');
-insert into roupa values(default, 'Disponível', '2022-08-18', 'Converse', 'M', 'Semi-novo');
-insert into roupa values(default, 'Disponível', '2022-09-30', 'Fila', 'XL', 'Semi-novo');
-insert into roupa values(default, 'Disponível', '2022-11-08', 'Asics', 'S', 'Novo');
+insert into roupa values(default, 'Disponível', '2022-01-15', 'Nike', 'M', 'Novo','Camisa');
+insert into roupa values(default, 'Disponível', '2022-03-20', 'Adidas', 'S', 'Novo','Short');
+insert into roupa values(default, 'Indisponível', '2022-02-10', 'Puma', 'L', 'Usado','Meia');
+insert into roupa values(default, 'Disponível', '2022-05-05', 'Reebok', 'XL', 'Novo','Camisa');
+insert into roupa values(default, 'Indisponível', '2022-04-01', 'Under Armour', 'M', 'Usado','Leg');
+insert into roupa values(default, 'Disponível', '2022-06-12', 'Chico Rei', 'S', 'Novo','Moleton');
+insert into roupa values(default, 'Indisponível', '2022-07-25', 'Vans', 'L', 'Novo','Camisa');
+insert into roupa values(default, 'Disponível', '2022-08-18', 'Zara', 'M', 'Semi-novo','Vestido');
+insert into roupa values(default, 'Disponível', '2022-09-30', 'Fila', 'XL', 'Semi-novo','Saia');
+insert into roupa values(default, 'Disponível', '2022-11-08', 'Asics', 'S', 'Novo','Bermuda');
 
 -- Plano
 insert into plano values (default,'Plano Casual', 'R$ 19,99');
@@ -360,6 +367,44 @@ insert into roupa_mat values (3, 3);  -- Roupas do cliente Pedro Santos são fei
 insert into roupa_mat values (4, 4);  -- Roupas do cliente Ana Souza são feitas de "Metal"
 insert into roupa_mat values (5, 5);  -- Roupas do cliente Carlos Ferreira são feitas de "Madeira"
 
+-- Assina
+insert into assina values(1, 1, '2022-01-01', '1 semanas');   -- Cliente João Silva assina o Plano Básico
+insert into assina values(2, 2, '2022-02-15', '2 semanas');   -- Cliente Maria Oliveira assina o Plano Padrão
+insert into assina values(3, 3, '2022-03-10', '4 semanas');   -- Cliente Pedro Santos assina o Plano Premium
+insert into assina values(4, 4, '2022-04-20', '2 semanas');   -- Cliente Ana Souza assina o Plano Família
+insert into assina values(5, 5, '2022-05-05', '4 semanas');   -- Cliente Carlos Ferreira assina o Plano Empresarial
+
+-- Pedido
+insert into pedido values (default,'Pendente', '2022-01-10', 'RA123456', 1, 1);    -- Pedido 1: Pendente, cliente João Silva, entregador 1
+insert into pedido values (default,'Em trânsito', '2022-02-15', 'RA234567', 2, 2); -- Pedido 2: Em trânsito, cliente Maria Oliveira, entregador 2
+insert into pedido values (default,'Entregue', '2022-03-20', 'RA345678', 3, 1);    -- Pedido 3: Entregue, cliente Pedro Santos, entregador 1
+insert into pedido values (default,'Pendente', '2022-04-25', 'RA456789', 4, 3);    -- Pedido 4: Pendente, cliente Ana Souza, entregador 3
+insert into pedido values (default,'Em trânsito', '2022-05-30', 'RA567890', 5, 2); -- Pedido 5: Em trânsito, cliente Carlos Ferreira, entregador 2
+insert into pedido values (default,'Entregue', '2022-06-10', 'RA678901', 1, 3);    -- Pedido 6: Entregue, cliente João Silva, entregador 3
+insert into pedido values (default,'Pendente', '2022-07-15', 'RA789012', 2, 1);    -- Pedido 7: Pendente, cliente Maria Oliveira, entregador 1
+insert into pedido values (default,'Em trânsito', '2022-08-20', 'RA890123', 3, 2); -- Pedido 8: Em trânsito, cliente Pedro Santos, entregador 2
+insert into pedido values (default,'Entregue', '2022-09-25', 'RA901234', 4, 3);    -- Pedido 9: Entregue, cliente Ana Souza, entregador 3
+insert into pedido values (default,'Pendente', '2022-10-30', 'RA012345', 5, 1);    -- Pedido 10: Pendente, cliente Carlos Ferreira, entregador 1
+
+-- Pedidos_Roupa
+insert into pedidos_roupa values (1, 1, 1);    -- Pedido 1: Cliente João Silva comprou a roupa 1
+insert into pedidos_roupa values (1, 1, 2);    -- Pedido 1: Cliente João Silva comprou a roupa 2
+insert into pedidos_roupa values (2, 2, 3);    -- Pedido 2: Cliente Maria Oliveira comprou a roupa 3
+insert into pedidos_roupa values (2, 2, 4);    -- Pedido 2: Cliente Maria Oliveira comprou a roupa 4
+insert into pedidos_roupa values (3, 3, 5);    -- Pedido 3: Cliente Pedro Santos comprou a roupa 5
+insert into pedidos_roupa values (3, 3, 1);    -- Pedido 3: Cliente Pedro Santos comprou a roupa 1
+insert into pedidos_roupa values (4, 4, 2);    -- Pedido 4: Cliente Ana Souza comprou a roupa 2
+insert into pedidos_roupa values (4, 4, 3);    -- Pedido 4: Cliente Ana Souza comprou a roupa 3
+insert into pedidos_roupa values (5, 5, 4);    -- Pedido 5: Cliente Carlos Ferreira comprou a roupa 4
+insert into pedidos_roupa values (5, 5, 5);    -- Pedido 5: Cliente Carlos Ferreira comprou a roupa 5
+insert into pedidos_roupa values (6, 1, 3);    -- Pedido 6: Cliente João Silva comprou a roupa 3
+insert into pedidos_roupa values (7, 2, 4);    -- Pedido 7: Cliente Maria Oliveira comprou a roupa 4
+insert into pedidos_roupa values (7, 2, 5);    -- Pedido 7: Cliente Maria Oliveira comprou a roupa 5
+insert into pedidos_roupa values (8, 3, 1);    -- Pedido 8: Cliente Pedro Santos comprou a roupa 1
+insert into pedidos_roupa values (9, 4, 2);    -- Pedido 9: Cliente Ana Souza comprou a roupa 2
+insert into pedidos_roupa values (9, 4, 3);    -- Pedido 9: Cliente Ana Souza comprou a roupa 3
+insert into pedidos_roupa values (10, 5, 4);   -- Pedido 10: Cliente Carlos Ferreira comprou a roupa 4
+insert into pedidos_roupa values (10, 5, 5);   -- Pedido 10: Cliente Carlos Ferreira comprou a roupa 5
 
 
 -- CONSULTAS
