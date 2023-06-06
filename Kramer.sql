@@ -55,7 +55,7 @@ create table pedido (
 );
 
 create table plano (
-	id_plano 			integer			not null,
+	id_plano 			serial			not null,
 	tipo				varchar(45)		not null,
 	preco				varchar(45)		not null
 );
@@ -68,7 +68,7 @@ create table assina (
 );
 
 create table roupa (
-	id_roupa			integer        	not null,
+	id_roupa			serial        	not null,
 	status				varchar(45)		not null,
 	data_aquisicao		date			not null,
 	marca        		varchar(45),
@@ -77,17 +77,17 @@ create table roupa (
 );
 
 create table categoria (
-	id_categoria		integer			not null,
+	id_categoria		serial			not null,
 	desc_categ			varchar(45)		not null
 );
 
 create table cor (
-	id_cor				integer			not null,
+	id_cor				serial			not null,
 	desc_cor			varchar(45)		not null
 );
 
 create table material (
-	id_material			integer			not null,
+	id_material			serial			not null,
 	desc_mat			varchar(45)		not null
 );
 
@@ -282,7 +282,16 @@ insert into material values(default, 'Metal');
 insert into material values(default, 'Madeira');
 
 -- Roupa
-
+insert into roupa values(default, 'Disponível', '2022-01-15', 'Nike', 'M', 'Novo');
+insert into roupa values(default, 'Disponível', '2022-03-20', 'Adidas', 'S', 'Novo');
+insert into roupa values(default, 'Indisponível', '2022-02-10', 'Puma', 'L', 'Usado');
+insert into roupa values(default, 'Disponível', '2022-05-05', 'Reebok', 'XL', 'Novo');
+insert into roupa values(default, 'Indisponível', '2022-04-01', 'Under Armour', 'M', 'Usado');
+insert into roupa values(default, 'Disponível', '2022-06-12', 'New Balance', 'S', 'Novo');
+insert into roupa values(default, 'Indisponível', '2022-07-25', 'Vans', 'L', 'Usado');
+insert into roupa values(default, 'Disponível', '2022-08-18', 'Converse', 'M', 'Semi-novo');
+insert into roupa values(default, 'Disponível', '2022-09-30', 'Fila', 'XL', 'Semi-novo');
+insert into roupa values(default, 'Disponível', '2022-11-08', 'Asics', 'S', 'Novo');
 
 -- CONSULTAS
 
@@ -291,6 +300,11 @@ insert into material values(default, 'Madeira');
 select * from setor;
 select * from funcionario;
 select * from entregador;
+select * from cliente;
+select * from categoria;
+select * from cor;
+select * from material;
+select * from roupa;
 
 
 
@@ -307,3 +321,6 @@ select * from entregador;
 -- drop table material cascade;
 -- drop table roupa cascade;
 -- drop table endereco_cliente cascade;
+-- drop table roupa_categ cascade;
+-- drop table roupa_mat cascade;
+-- drop table roupa_cor cascade;
