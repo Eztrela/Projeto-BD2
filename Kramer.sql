@@ -310,6 +310,43 @@ insert into roupa values(default, 'Disponível', '2022-08-18', 'Converse', 'M', 
 insert into roupa values(default, 'Disponível', '2022-09-30', 'Fila', 'XL', 'Semi-novo');
 insert into roupa values(default, 'Disponível', '2022-11-08', 'Asics', 'S', 'Novo');
 
+-- Plano
+insert into plano values (default,'Plano Casual', 'R$ 19,99');
+insert into plano values (default,'Plano Workaholic', 'R$ 29,99');
+insert into plano values (default,'Plano Party', 'R$ 49,99');
+insert into plano values (default,'Plano Custom', 'R$ 39,99');
+insert into plano values (default,'Plano Business', 'R$ 79,99');
+
+--Endereço
+
+-- Inserir endereço para o cliente João Silva
+INSERT INTO endereco_cliente (id_cliente, rua, numero, cidade, estado, bairro, CEP)
+VALUES (1, 'Rua A', '123', 'São Paulo', 'SP', 'Centro', '01234-567');
+
+-- Inserir endereço para a cliente Maria Oliveira
+INSERT INTO endereco_cliente (id_cliente, rua, numero, cidade, estado, bairro, CEP)
+VALUES (2, 'Rua B', '456', 'Rio de Janeiro', 'RJ', 'Copacabana', '98765-432');
+
+-- Inserir endereço para o cliente Pedro Santos
+INSERT INTO endereco_cliente (id_cliente, rua, numero, cidade, estado, bairro, CEP)
+VALUES (3, 'Rua C', '789', 'Belo Horizonte', 'MG', 'Savassi', '54321-876');
+
+-- Inserir endereço para a cliente Ana Souza
+INSERT INTO endereco_cliente (id_cliente, rua, numero, cidade, estado, bairro, CEP)
+VALUES (4, 'Rua D', '321', 'Curitiba', 'PR', 'Batel', '45678-901');
+
+-- Inserir endereço para o cliente Carlos Ferreira
+INSERT INTO endereco_cliente (id_cliente, rua, numero, cidade, estado, bairro, CEP)
+VALUES (5, 'Rua E', '654', 'Porto Alegre', 'RS', 'Moinhos de Vento', '78901-234');
+
+-- Roupa_categ
+insert into roupa_categ values (1, 2);  -- Roupas do cliente João Silva são da categoria "Roupas"
+insert into roupa_categ values (2, 2);  -- Roupas da cliente Maria Oliveira são da categoria "Roupas"
+insert into roupa_categ values (3, 1);  -- Roupas do cliente Pedro Santos são da categoria "Eletrônicos"
+insert into roupa_categ values (4, 3);  -- Roupas do cliente Ana Souza são da categoria "Acessórios"
+insert into roupa_categ values (5, 2);  -- Roupas do cliente Carlos Ferreira são da categoria "Roupas"
+
+
 -- CONSULTAS
 
 -- Básicas
