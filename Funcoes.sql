@@ -11,18 +11,3 @@ begin
 end; $$ language plpgsql;
 
 select mediaSalario();
-
-
--- create or replace function pedidoMaisRecente()
--- returns date
--- as $$
--- declare data date;
-
--- begin
--- 	select max(data_pedido) into data from pedido;
--- 	return data;
-	
--- end; $$ language plpgsql;
-
--- select pedidoMaisRecente()
-
