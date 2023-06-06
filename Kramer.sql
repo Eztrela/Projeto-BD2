@@ -113,86 +113,100 @@ create table roupa_mat (
 );
 
 -- CONSTRAINTS
--- PK
-alter table funcionario add constraint
-pk_funcionario primary key(id_funcionario);
-
+-- setor
 alter table setor add constraint
 pk_setor primary key(id_setor);
-
-alter table entregador add constraint
-pk_entregador primary key(id_funcionario);
-
-alter table cliente add constraint
-pk_cliente primary key(id_cliente);
-
-alter table endereco_cliente add constraint
-pk_endereco_cliente primary key(id_endereco, id_cliente);
-
-alter table plano add constraint
-pk_plano primary key(id_plano);
-
-alter table roupa add constraint
-pk_roupa primary key(id_roupa);
-
-alter table categoria add constraint
-pk_categoria primary key(id_categoria);
-
-alter table cor add constraint
-pk_cor primary key(id_cor);
-
-alter table material add constraint
-pk_material primary key(id_material);
-
-alter table roupa_categ add constraint
-pk_roupa_categ primary key (id_roupa,id_categ);
-
-alter table roupa_cor add constraint
-pk_roupa_cor primary key (id_roupa,id_cor);
-
-alter table roupa_mat add constraint
-pk_roupa_mat primary key (id_roupa,id_mat);
-
-alter table pedidos_roupa add constraint
-pk_pedidos_roupa primary key (id_pedido,id_cliente,id_roupa);
-
-alter table assina add constraint
-pk_assina primary key (id_cliente,id_plano,data_inicio);
-
-alter table pedido add constraint
-pk_pedido primary key (id_pedido);
-
--- FK
-alter table funcionario add constraint
-fk_setor foreign key (setor) references setor;
 
 alter table setor add constraint
 fk_gerente foreign key (gerente) references setor;
 
+-- funcionario
+alter table funcionario add constraint
+pk_funcionario primary key(id_funcionario);
+
+alter table funcionario add constraint
+fk_setor foreign key (setor) references setor;
+
+-- entregador
+alter table entregador add constraint
+pk_entregador primary key(id_funcionario);
+
 alter table entregador add constraint
 fk_funcionario_entregador foreign key(id_funcionario) references funcionario;
+
+-- cliente
+alter table cliente add constraint
+pk_cliente primary key(id_cliente);
+
+-- endereco_cliente
+alter table endereco_cliente add constraint
+pk_endereco_cliente primary key(id_endereco, id_cliente);
 
 alter table endereco_cliente add constraint
 fk_endereco_cliente foreign key(id_cliente) references cliente;
 
+-- plano
+alter table plano add constraint
+pk_plano primary key(id_plano);
+
+-- pedido
+alter table pedido add constraint
+pk_pedido primary key (id_pedido);
+
+alter table pedido add constraint
+fk_pedido_cliente foreign key (id_cliente) references cliente;
+
+alter table pedido add constraint
+fk_pedido_entregador foreign key (id_entregador) references entregador;
+
+-- roupa
+alter table roupa add constraint
+pk_roupa primary key(id_roupa);
+
+
+-- categoria
+alter table categoria add constraint
+pk_categoria primary key(id_categoria);
+
+-- cor
+alter table cor add constraint
+pk_cor primary key(id_cor);
+
+-- material
+alter table material add constraint
+pk_material primary key(id_material);
+
+-- roupa_categ
 alter table roupa_categ add constraint
 fk_roupa_categ foreign key(id_roupa) references roupa;
-
-alter table roupa_cor add constraint
-fk_roupa_cor foreign key(id_roupa) references roupa;
-
-alter table roupa_mat add constraint
-fk_roupa_mat foreign key(id_roupa) references roupa;
 
 alter table roupa_categ add constraint
 fk_categoria foreign key(id_categ) references categoria;
 
+alter table roupa_categ add constraint
+pk_roupa_categ primary key (id_roupa,id_categ);
+
+-- roupa_cor
+alter table roupa_cor add constraint
+fk_roupa_cor foreign key(id_roupa) references roupa;
+
+alter table roupa_cor add constraint
+pk_roupa_cor primary key (id_roupa,id_cor);
+
 alter table roupa_cor add constraint
 fk_cor foreign key(id_cor) references cor;
+
+-- roupa_mat
+alter table roupa_mat add constraint
+fk_roupa_mat foreign key(id_roupa) references roupa;
 
 alter table roupa_mat add constraint
 fk_material foreign key(id_mat) references material;
 
+alter table roupa_mat add constraint
+pk_roupa_mat primary key (id_roupa,id_mat);
+
+-- pedidos_roupa
 alter table pedidos_roupa add constraint
 fk_pedidos_roupa_pedido foreign key (id_pedido) references pedido;
 
@@ -202,19 +216,21 @@ fk_pedidos_roupa_cliente foreign key (id_cliente) references cliente;
 alter table pedidos_roupa add constraint
 fk_pedidos_roupa_roupa foreign key (id_roupa) references roupa;
 
+alter table pedidos_roupa add constraint
+pk_pedidos_roupa primary key (id_pedido,id_cliente,id_roupa);
+
+-- assina
 alter table assina add constraint
 fk_assina_plano foreign key (id_plano) references plano;
 
 alter table assina add constraint
 fk_assina_cliente foreign key (id_cliente) references cliente;
 
-alter table pedido add constraint
-fk_pedido_cliente foreign key (id_cliente) references cliente;
+alter table assina add constraint
+pk_assina primary key (id_cliente,id_plano,data_inicio);
 
-alter table pedido add constraint
-fk_pedido_entregador foreign key (id_entregador) references entregador;
 
--- fk id cliente para entrega
+
 
 -- Unique
 alter table funcionario add constraint
@@ -228,6 +244,7 @@ Uni_CPF_cliente unique(CPF);
 
 alter table cliente add constraint
 Uni_email_cliente unique(email);
+
 
 
 -- INSERÇÕES
@@ -296,7 +313,6 @@ insert into roupa values(default, 'Disponível', '2022-11-08', 'Asics', 'S', 'No
 -- CONSULTAS
 
 -- Básicas
-
 select * from setor;
 select * from funcionario;
 select * from entregador;
@@ -305,7 +321,6 @@ select * from categoria;
 select * from cor;
 select * from material;
 select * from roupa;
-
 
 
 -- drop table setor cascade;
