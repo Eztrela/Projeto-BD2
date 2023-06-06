@@ -346,6 +346,12 @@ insert into roupa_categ values (3, 1);  -- Roupas do cliente Pedro Santos são d
 insert into roupa_categ values (4, 3);  -- Roupas do cliente Ana Souza são da categoria "Acessórios"
 insert into roupa_categ values (5, 2);  -- Roupas do cliente Carlos Ferreira são da categoria "Roupas"
 
+-- Roupa_cor
+insert into roupa_cor values (1, 1);  -- Roupas do cliente João Silva são da cor "Azul"
+insert into roupa_cor values (2, 2);  -- Roupas da cliente Maria Oliveira são da cor "Vermelho"
+insert into roupa_cor values (3, 3);  -- Roupas do cliente Pedro Santos são da cor "Verde"
+insert into roupa_cor values (4, 4);  -- Roupas do cliente Ana Souza são da cor "Amarelo"
+insert into roupa_cor values (5, 5);  -- Roupas do cliente Carlos Ferreira são da cor "Preto"
 
 -- CONSULTAS
 
