@@ -353,6 +353,15 @@ insert into roupa_cor values (3, 3);  -- Roupas do cliente Pedro Santos são da 
 insert into roupa_cor values (4, 4);  -- Roupas do cliente Ana Souza são da cor "Amarelo"
 insert into roupa_cor values (5, 5);  -- Roupas do cliente Carlos Ferreira são da cor "Preto"
 
+-- Roupa_mat
+insert into roupa_mat values (1, 1);  -- Roupas do cliente João Silva são feitas de "Algodão"
+insert into roupa_mat values (2, 2);  -- Roupas da cliente Maria Oliveira são feitas de "Couro"
+insert into roupa_mat values (3, 3);  -- Roupas do cliente Pedro Santos são feitas de "Plástico"
+insert into roupa_mat values (4, 4);  -- Roupas do cliente Ana Souza são feitas de "Metal"
+insert into roupa_mat values (5, 5);  -- Roupas do cliente Carlos Ferreira são feitas de "Madeira"
+
+
+
 -- CONSULTAS
 
 -- Básicas
