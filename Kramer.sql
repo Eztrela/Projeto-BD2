@@ -7,18 +7,13 @@ create table funcionario (
 	sexo 				char(1),
 	email 				varchar(45) 	not null,
 	salario				varchar(45)		not null,
-	setor				integer			not null,
-	gerente				integer 		null
+	setor				integer			not null
 );
 
 create table setor (
 	id_setor 			serial 			not null,
-	nome				varchar(45)		not null
-);
-
-create table gerente (
-	id_funcionario 		integer			not null,
-	id_setor 			integer			not null
+	nome				varchar(45)		not null,
+	gerente				integer			not null
 );
 
 create table entregador (
@@ -56,8 +51,7 @@ create table pedido (
 	rastreio			varchar(45)		not null,
 	
 	id_cliente			integer			not null,
-	id_entregador		integer			not null,
-	entregue_a_cliente	integer			not null
+	id_entregador		integer			not null
 );
 
 create table plano (
@@ -103,6 +97,21 @@ create table pedidos_roupa (
 	id_roupa			integer			not null
 );
 
+create table roupa_categ (
+	id_roupa			integer			not null,
+	id_categ			integer			not null
+);
+
+create table roupa_categ (
+	id_roupa			integer			not null,
+	id_categ			integer			not null
+);
+
+create table roupa_categ (
+	id_roupa			integer			not null,
+	id_categ			integer			not null
+);
+
 -- CONSTRAINTS
 -- PK
 alter table funcionario add constraint
@@ -110,9 +119,6 @@ pk_funcionario primary key(id_funcionario);
 
 alter table setor add constraint
 pk_setor primary key(id_setor);
-
-alter table gerente add constraint
-pk_gerente primary key(id_funcionario);
 
 alter table entregador add constraint
 pk_entregador primary key(id_funcionario);
@@ -149,16 +155,10 @@ pk_pedido primary key (id_pedido);
 
 -- FK
 alter table funcionario add constraint
-fk_gerente foreign key(gerente) references gerente;
-
-alter table funcionario add constraint
 fk_setor foreign key (setor) references setor;
 
-alter table gerente add constraint
-fk_setor foreign key(id_setor) references setor;
-
-alter table gerente add constraint
-fk_funcionario_gerente foreign key(id_funcionario) references funcionario;
+alter table setor add constraint
+fk_gerente foreign key (gerente) references id_setor
 
 alter table entregador add constraint
 fk_funcionario_entregador foreign key(id_funcionario) references funcionario;
