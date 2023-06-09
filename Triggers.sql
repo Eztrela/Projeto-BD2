@@ -1,3 +1,16 @@
+/* 
+		Justificativa semântica:
+
+Para garantir a consistência dos dados
+é necessário haver um gerente para os setores.
+
+Como a criação do setor antecede
+a criação do funcionário,
+os setores são criados com o gerente nulo.
+
+Logo, faz sentido que o primeiro funcionário
+daquele setor seja o gerente.
+*/
 create or replace function tornar_gerente()
 returns trigger as $$
 declare ger integer;
