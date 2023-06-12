@@ -92,7 +92,9 @@ begin
 end;
 $$ language plpgsql;
 
-select marcas_mais_pedidas_cliente(1);
+
+select * from marcas_mais_pedidas_cliente(1);
+
 
 
 create function listar_clientes_por_cor(roupa_cor VARCHAR)
@@ -120,3 +122,4 @@ end;
 $$ language plpgsql;
 
 select * from listar_clientes_por_cor('Vermelho');
+
