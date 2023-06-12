@@ -70,6 +70,7 @@ begin
 end;
 $$ language plpgsql;
 
+
 call inserir_roupa_cor_categ_mat('Disponivel', '2019-12-29', 'Kings', 'G', 'Novo', 'Camisa', 'Branco', 'Algodão', 'Casual')
 
 
@@ -122,4 +123,5 @@ end;
 $$ language plpgsql;
 
 select * from listar_clientes_por_cor('Vermelho');
+
 
