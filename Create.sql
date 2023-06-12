@@ -28,7 +28,7 @@ create table cliente (
 	nome				varchar(100)	not null,
 	CPF					char(14)		not null,
 	data_nascimento		date			not null,
-	sexo				char(1)			not null,
+	sexo				char(1),
 	email				varchar(100)	not null,
 	senha 				varchar(100)	not null,
 	telefone			varchar(45)		not null
