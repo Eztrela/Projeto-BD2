@@ -115,19 +115,21 @@ create table roupa_mat (
 );
 
 -- CONSTRAINTS
--- setor
-alter table setor add constraint
-pk_setor primary key(id_setor);
-
-alter table setor add constraint
-fk_gerente foreign key (gerente) references setor;
-
--- funcionario
+-- funcionario PK
 alter table funcionario add constraint
 pk_funcionario primary key(id_funcionario);
 
+
+-- setor PK
+alter table setor add constraint
+pk_setor primary key(id_setor);
+
+-- funcionario e setor FK's
 alter table funcionario add constraint
 fk_setor foreign key (setor) references setor;
+
+alter table setor add constraint
+fk_gerente foreign key (gerente) references funcionario;
 
 -- entregador
 alter table entregador add constraint

@@ -16,15 +16,16 @@ returns trigger as $$
 declare ger integer;
 begin
 	select gerente into ger from setor where id_setor = new.setor;
-	
+
 	if (ger is null) then
 		update setor
 		set gerente = new.id_funcionario
 		where id_setor = new.setor;
-	
-	
+
+
     end if;
-    return new;
+    return null;
+
 end;
 $$ language plpgsql;
 
@@ -32,6 +33,19 @@ create or replace trigger trigger_tornar_gerente
 after insert on funcionario
 for each row
 execute function tornar_gerente();
+
+
+-- Inserção 1
+INSERT INTO funcionario (id_funcionario, nome, CPF, data_nascimento, sexo, email, salario, setor)
+VALUES (default, 'Ana Santos', '111.222.333-44', '1995-08-12', 'F', 'ana.santos@example.com', 2500.00, 3);
+
+-- Inserção 2
+INSERT INTO funcionario (id_funcionario, nome, CPF, data_nascimento, sexo, email, salario, setor)
+VALUES (default, 'Pedro Oliveira', '444.555.666-77', '1998-03-25', 'M', 'pedro.oliveira@example.com', 3200.00, 2);
+
+-- Inserção 3
+INSERT INTO funcionario (id_funcionario, nome, CPF, data_nascimento, sexo, email, salario, setor)
+VALUES (default, 'Mariana Costa', '888.999.000-11', '1993-12-05', 'F', 'mariana.costa@example.com', 2900.00, 3);
 
 /* 
 		Justificativa semântica:
@@ -67,3 +81,4 @@ insert into funcionario values (default,'Enzo Leclerc','495.245.234-42','2005-09
 insert into funcionario values (default,'Maria Raluca','210.810.134-94','1999-12-28','F','raluca@gmail.com',3500,2);
 
 select nome, media_salarial from setor;
+
