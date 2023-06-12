@@ -2,18 +2,19 @@
 create table funcionario (
 	id_funcionario 		serial 			not null,
 	nome 				varchar(100)	not null,
-	CPF 				char(14) 	not null,
+	CPF 				char(14) 		not null,
 	data_nascimento 	date 			not null,
 	sexo 				char(1),
 	email 				varchar(45) 	not null,
-	salario				varchar(45)		not null,
+	salario				decimal(10, 2)	not null,
 	setor				integer			not null
 );
 
 create table setor (
 	id_setor 			serial 			not null,
 	nome				varchar(45)		not null,
-	gerente				integer			null
+	gerente				integer			null,
+	media_salarial		decimal(10, 2)	null
 );
 
 create table entregador (
@@ -27,7 +28,7 @@ create table cliente (
 	nome				varchar(100)	not null,
 	CPF					char(14)		not null,
 	data_nascimento		date			not null,
-	sexo				char(1)			not null,
+	sexo				char(1),
 	email				varchar(100)	not null,
 	senha 				varchar(100)	not null,
 	telefone			varchar(45)		not null
@@ -114,19 +115,21 @@ create table roupa_mat (
 );
 
 -- CONSTRAINTS
--- setor
-alter table setor add constraint
-pk_setor primary key(id_setor);
-
-alter table setor add constraint
-fk_gerente foreign key (gerente) references setor;
-
--- funcionario
+-- funcionario PK
 alter table funcionario add constraint
 pk_funcionario primary key(id_funcionario);
 
+
+-- setor PK
+alter table setor add constraint
+pk_setor primary key(id_setor);
+
+-- funcionario e setor FK's
 alter table funcionario add constraint
 fk_setor foreign key (setor) references setor;
+
+alter table setor add constraint
+fk_gerente foreign key (gerente) references funcionario;
 
 -- entregador
 alter table entregador add constraint
@@ -251,25 +254,19 @@ Uni_email_cliente unique(email);
 -- INSERÇÕES
 
 -- Setor
-insert into setor values(default, 'Entregas',null);
-insert into setor values(default, 'Empacotamento',null);
-insert into setor values(default, 'Suporte',null);
+insert into setor values(default, 'Entregas',null, null);
+insert into setor values(default, 'Empacotamento',null, null);
+insert into setor values(default, 'Suporte',null, null);
 
 -- Funcionário
-insert into funcionario values (default,'Alecsander Cruz','110.917.434-95','1993-07-29','M','alecsander@gmail.com','15000',1);
-insert into funcionario values (default,'Bruno Rodrigues','375.667.084-81','1994-04-23','M','charles@gmail.com','10000',3);
-insert into funcionario values (default,'Charles Jhansen','535.794.894-10','1990-11-13','M','bruno@gmail.com','12000',2);
-insert into funcionario values (default,'João Silva', '123.456.789-00', '1990-01-01', 'M', 'joao.silva@example.com', '5000.00', 1);     -- Funcionário 1: João Silva, CPF 123.456.789-00, data de nascimento 1990-01-01, sexo masculino, e-mail joao.silva@example.com, salário 5000.00, setor 1
-insert into funcionario values (default,'Maria Oliveira', '987.654.321-00', '1995-05-10', 'F', 'maria.oliveira@example.com', '4500.00', 2);  -- Funcionário 2: Maria Oliveira, CPF 987.654.321-00, data de nascimento 1995-05-10, sexo feminino, e-mail maria.oliveira@example.com, salário 4500.00, setor 2
-insert into funcionario values (default,'Pedro Santos', '456.789.123-00', '1988-07-20', 'M', 'pedro.santos@example.com', '5500.00', 1);      -- Funcionário 3: Pedro Santos, CPF 456.789.123-00, data de nascimento 1988-07-20, sexo masculino, e-mail pedro.santos@example.com, salário 5500.00, setor 1
+insert into funcionario values (default,'Alecsander Cruz','110.917.434-95','1993-07-29','M','alecsander@gmail.com',15000,1);
+insert into funcionario values (default,'Bruno Rodrigues','375.667.084-81','1994-04-23','M','charles@gmail.com',10000,3);
+insert into funcionario values (default,'Charles Jhansen','535.794.894-10','1990-11-13','M','bruno@gmail.com',12000,2);
+insert into funcionario values (default,'João Silva', '123.456.789-00', '1990-01-01', 'M', 'joao.silva@example.com', 5000.00, 1);     -- Funcionário 1: João Silva, CPF 123.456.789-00, data de nascimento 1990-01-01, sexo masculino, e-mail joao.silva@example.com, salário 5000.00, setor 1
+insert into funcionario values (default,'Maria Oliveira', '987.654.321-00', '1995-05-10', 'F', 'maria.oliveira@example.com', 4500.00, 2);  -- Funcionário 2: Maria Oliveira, CPF 987.654.321-00, data de nascimento 1995-05-10, sexo feminino, e-mail maria.oliveira@example.com, salário 4500.00, setor 2
+insert into funcionario values (default,'Pedro Santos', '456.789.123-00', '1988-07-20', 'M', 'pedro.santos@example.com', 5500.00, 1);      -- Funcionário 3: Pedro Santos, CPF 456.789.123-00, data de nascimento 1988-07-20, sexo masculino, e-mail pedro.santos@example.com, salário 5500.00, setor 1
 
 -- primeiro funcionario a ser inserido dispara um trigger para torna-lo gerente do setor ao qual foi adicionado
-
--- Gerente
-
-insert into funcionario values (default,'Juan Farias','985.569.294-27','2002-02-20','M','juan@gmail.com','5000',3);
-insert into funcionario values (default,'Enzo Leclerc','495.245.234-42','2005-09-17','M','enzo@gmail.com','2500',1);
-insert into funcionario values (default,'Maria raluca','210.810.134-94','1999-12-28','F','raluca@gmail.com','3500',2);
 
 -- Entregador
 insert into entregador values (5, '5229783620-1', 'Honda bros');

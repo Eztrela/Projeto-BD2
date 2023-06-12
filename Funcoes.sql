@@ -70,4 +70,58 @@ begin
 end;
 $$ language plpgsql;
 
+
 call inserir_roupa_cor_categ_mat('Disponivel', '2019-12-29', 'Kings', 'G', 'Novo', 'Camisa', 'Branco', 'Algodão', 'Casual')
+
+
+
+create or replace function marcas_mais_pedidas_cliente(cliente_id integer)
+  returns table (
+    marca varchar(45),
+    quantidade bigint
+  )
+as $$
+begin
+  return query
+  select r.marca, count(*) as quantidade
+  from roupa r
+  join pedidos_roupa pr on r.id_roupa = pr.id_roupa
+  join pedido p on pr.id_pedido = p.id_pedido
+  where p.id_cliente = cliente_id
+  group by r.marca
+  order by quantidade desc;
+end;
+$$ language plpgsql;
+
+
+select * from marcas_mais_pedidas_cliente(1);
+
+
+
+create function listar_clientes_por_cor(roupa_cor VARCHAR)
+returns table (cliente_id INT, cliente_nome VARCHAR)
+as $$
+begin
+    begin
+        return query
+        select distinct cl.id_cliente, cl.nome
+        from cliente cl
+        join pedido p on p.id_cliente = cl.id_cliente
+        join pedidos_roupa pr on pr.id_pedido = p.id_pedido
+        join roupa r on r.id_roupa = pr.id_roupa
+		join roupa_cor rc on rc.id_roupa = r.id_roupa
+		join cor c on c.id_cor = rc.id_cor
+        where c.desc_cor = roupa_cor;
+   		if not found then
+            raise exception 'Nenhum cliente encontrado com a cor especificada.';
+        end if;
+    exception
+        when others then
+            raise exception 'Erro ao executar a consulta: %', SQLERRM;
+	end;
+end;
+$$ language plpgsql;
+
+select * from listar_clientes_por_cor('Vermelho');
+
+
